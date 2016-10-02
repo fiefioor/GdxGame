@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<map version="1.0" orientation="orthogonal" renderorder="right-down" width="50" height="10" tilewidth="16" tileheight="16" nextobjectid="11">
+ <tileset firstgid="1" name="smbTileset" tilewidth="16" tileheight="16" tilecount="924" columns="33">
+  <image source="../../../../Downloads/smbTileset.png" width="528" height="448"/>
+ </tileset>
+ <layer name="background" width="50" height="10">
+  <data encoding="base64" compression="zlib">
+   eJz7zcTA8HsUj+JRPIpH8SgexUMaAwCOIu40
+  </data>
+ </layer>
+ <layer name="graphics" width="50" height="10">
+  <data encoding="base64" compression="zlib">
+   eJxjYBgFo4D64AQd8CgYvMCVRngUjAJaAKZhggH1khnb
+  </data>
+ </layer>
+ <objectgroup name="groud_red">
+  <object id="2" x="0" y="144" width="800" height="16"/>
+ </objectgroup>
+ <objectgroup name="ground_blue">
+  <object id="3" x="448" y="80" width="352" height="16"/>
+ </objectgroup>
+ <objectgroup name="ground_green">
+  <object id="4" x="0" y="48" width="400" height="16"/>
+ </objectgroup>
+</map>

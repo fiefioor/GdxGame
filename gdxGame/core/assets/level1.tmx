@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<map version="1.0" orientation="orthogonal" renderorder="right-down" width="50" height="50" tilewidth="16" tileheight="16" nextobjectid="16">
+ <tileset firstgid="1" name="tileset_gutter" tilewidth="16" tileheight="16" spacing="2" margin="1" tilecount="696" columns="29">
+  <image source="../../../../Downloads/NES - Super Mario Bros - Tileset.png" width="528" height="448"/>
+ </tileset>
+ <tileset firstgid="697" name="Tileset" tilewidth="16" tileheight="16" tilecount="924" columns="33">
+  <image source="../../../../Downloads/NES - Super Mario Bros - Tileset.png" width="528" height="448"/>
+ </tileset>
+ <layer name="background" width="50" height="50">
+  <data encoding="base64" compression="zlib">
+   eJztwzEJAAAMA7A+E1z/T3UMEkgvqaqqqqqqqqqqqj4/1TSAlQ==
+  </data>
+ </layer>
+ <layer name="graphics" width="50" height="50">
+  <data encoding="base64" compression="zlib">
+   eJzt0sEJg0AQQNFBsbzETqIlpC4LsQu1AQ+Zs3gRdMXwHvzTsjssTAQAAAAAAAAARLyaiHfWNs+e98n3uqwv9I/S8+AOa1WuPd/6nOAuU+7fnC0H9/DKe+PmbKj+ox/3/la1
+  </data>
+ </layer>
+ <objectgroup name="ground_red">
+  <object id="11" x="0" y="784" width="800" height="16"/>
+ </objectgroup>
+ <objectgroup name="ground_green">
+  <object id="13" x="512" y="704" width="288" height="16"/>
+ </objectgroup>
+ <objectgroup name="ground_blue">
+  <object id="15" x="0" y="704" width="432" height="16"/>
+ </objectgroup>
+</map>
