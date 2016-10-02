@@ -24,12 +24,14 @@ import com.badlogic.gdx.physics.box2d.Box2DDebugRenderer;
 import com.badlogic.gdx.physics.box2d.FixtureDef;
 import com.badlogic.gdx.physics.box2d.PolygonShape;
 import com.badlogic.gdx.physics.box2d.World;
+import com.badlogic.gdx.utils.Disposable;
 import com.badlogic.gdx.utils.viewport.FitViewport;
 import com.badlogic.gdx.utils.viewport.StretchViewport;
 import com.badlogic.gdx.utils.viewport.Viewport;
 import com.gdx.game.GdxGame;
 import com.gdx.game.scenes.Hud;
 import com.gdx.game.sprites.Player;
+import com.gdx.game.tools.b2WorldCreator;
 
 /**
  *
@@ -71,50 +73,8 @@ public class PlayScreen implements Screen {
         this.world = new World(new Vector2(0, -10), true);
         this.box2DDebugRenderer = new Box2DDebugRenderer();
 
-        BodyDef bodyDef = new BodyDef();
-        PolygonShape shape = new PolygonShape();
-        FixtureDef fixtureDef = new FixtureDef();
-        Body body;
-
-        // ground red
-        for (MapObject object : map.getLayers().get(2).getObjects().getByType(RectangleMapObject.class)) {
-            Rectangle rect = ((RectangleMapObject) object).getRectangle();
-
-            bodyDef.type = BodyDef.BodyType.StaticBody;
-           bodyDef.position.set((rect.getX() + rect.getWidth() / 2) / GdxGame.PPM, (rect.getY() + rect.getHeight() / 2) / GdxGame.PPM);
-
-            body = this.world.createBody(bodyDef);
-            shape.setAsBox(rect.getWidth() / 2 / GdxGame.PPM, rect.getHeight() / 2 / GdxGame.PPM);
-            fixtureDef.shape = shape;
-            body.createFixture(fixtureDef);
-        }
-
-        // ground blue
-        for (MapObject object : map.getLayers().get(3).getObjects().getByType(RectangleMapObject.class)) {
-            Rectangle rect = ((RectangleMapObject) object).getRectangle();
-
-            bodyDef.type = BodyDef.BodyType.StaticBody;
-            bodyDef.position.set((rect.getX() + rect.getWidth() / 2) / GdxGame.PPM, (rect.getY() + rect.getHeight() / 2) / GdxGame.PPM);
-
-            body = this.world.createBody(bodyDef);
-            shape.setAsBox(rect.getWidth() / 2 / GdxGame.PPM, rect.getHeight() / 2 / GdxGame.PPM);
-            fixtureDef.shape = shape;
-            body.createFixture(fixtureDef);
-        }
-
-        // ground green
-        for (MapObject object : map.getLayers().get(4).getObjects().getByType(RectangleMapObject.class)) {
-            Rectangle rect = ((RectangleMapObject) object).getRectangle();
-
-            bodyDef.type = BodyDef.BodyType.StaticBody;
-            bodyDef.position.set((rect.getX() + rect.getWidth() / 2) / GdxGame.PPM, (rect.getY() + rect.getHeight() / 2) / GdxGame.PPM);
-
-            body = this.world.createBody(bodyDef);
-            shape.setAsBox(rect.getWidth() / 2 / GdxGame.PPM, rect.getHeight() / 2 / GdxGame.PPM);
-            fixtureDef.shape = shape;
-            body.createFixture(fixtureDef);
-        }
-
+        new b2WorldCreator(world, map);
+        
         this.player = new Player(this.world);
 
     }
@@ -178,7 +138,11 @@ public class PlayScreen implements Screen {
 
     @Override
     public void dispose() {
-
+        this.map.dispose();
+        this.renderer.dispose();
+        this.world.dispose();
+        this.box2DDebugRenderer.dispose();
+        this.hud.dispose();
     }
 
     private void handleInput(float dt) {
