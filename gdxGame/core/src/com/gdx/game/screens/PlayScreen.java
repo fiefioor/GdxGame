@@ -11,6 +11,7 @@ import com.badlogic.gdx.Screen;
 import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.graphics.Texture;
+import com.badlogic.gdx.graphics.g2d.TextureAtlas;
 import com.badlogic.gdx.maps.MapObject;
 import com.badlogic.gdx.maps.objects.RectangleMapObject;
 import com.badlogic.gdx.maps.tiled.TiledMap;
@@ -40,6 +41,8 @@ import com.gdx.game.tools.b2WorldCreator;
 public class PlayScreen implements Screen {
 
     private GdxGame game;
+    private TextureAtlas atlas;
+
     private OrthographicCamera gameCam;
     private Viewport gamePort;
     private Hud hud;
@@ -56,6 +59,8 @@ public class PlayScreen implements Screen {
     private Box2DDebugRenderer box2DDebugRenderer;
 
     public PlayScreen(GdxGame game) {
+        atlas = new TextureAtlas("Mario_and_Enemies.pack");
+
         this.game = game;
         this.gameCam = new OrthographicCamera();
         this.gamePort = new FitViewport(GdxGame.V_WIDTH / GdxGame.PPM, GdxGame.V_HEIGHT / GdxGame.PPM, gameCam);
@@ -74,9 +79,13 @@ public class PlayScreen implements Screen {
         this.box2DDebugRenderer = new Box2DDebugRenderer();
 
         new b2WorldCreator(world, map);
-        
-        this.player = new Player(this.world);
 
+        this.player = new Player(this.world, this);
+
+    }
+
+    public TextureAtlas getAtlas() {
+        return this.atlas;
     }
 
     @Override
@@ -94,6 +103,8 @@ public class PlayScreen implements Screen {
 
         this.world.step(1 / 60f, 6, 2);
         
+        player.update(dt);
+
         gameCam.position.x = player.b2body.getPosition().x;
 
         this.gameCam.update();
@@ -108,10 +119,16 @@ public class PlayScreen implements Screen {
         Gdx.gl.glClearColor(0, 0, 0, 1);
         Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
 
+        //render game map
         renderer.render();
 
         this.box2DDebugRenderer.render(this.world, this.gameCam.combined);
 
+        game.getBatch().setProjectionMatrix(gameCam.combined);
+        game.getBatch().begin();
+        player.draw(game.getBatch());
+        game.getBatch().end();
+        
         game.getBatch().setProjectionMatrix(hud.stage.getCamera().combined);
         hud.stage.draw();
     }
@@ -146,13 +163,13 @@ public class PlayScreen implements Screen {
     }
 
     private void handleInput(float dt) {
-        if(Gdx.input.isKeyJustPressed(Input.Keys.UP)){
+        if (Gdx.input.isKeyJustPressed(Input.Keys.UP)) {
             player.b2body.applyLinearImpulse(new Vector2(0, 5f), player.b2body.getWorldCenter(), true);
         }
-        if(Gdx.input.isKeyPressed(Input.Keys.RIGHT) && player.b2body.getLinearVelocity().x <= 2){
+        if (Gdx.input.isKeyPressed(Input.Keys.RIGHT) && player.b2body.getLinearVelocity().x <= 2) {
             player.b2body.applyLinearImpulse(new Vector2(0.1f, 0), player.b2body.getWorldCenter(), true);
         }
-         if(Gdx.input.isKeyPressed(Input.Keys.LEFT) && player.b2body.getLinearVelocity().x >= -2){
+        if (Gdx.input.isKeyPressed(Input.Keys.LEFT) && player.b2body.getLinearVelocity().x >= -2) {
             player.b2body.applyLinearImpulse(new Vector2(-0.1f, 0), player.b2body.getWorldCenter(), true);
         }
 
