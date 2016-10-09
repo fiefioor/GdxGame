@@ -5,6 +5,7 @@
  */
 package com.gdx.game.sprites;
 
+import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.maps.tiled.TiledMap;
 import com.badlogic.gdx.math.Rectangle;
 import com.badlogic.gdx.physics.box2d.BodyDef;
@@ -21,7 +22,15 @@ public class Token extends InteractiveTileObject {
 
     public Token(World world, TiledMap map, Rectangle bounds) {
         super(world, map, bounds);
-
+        fixture.setUserData(this);
+        setCategoryFilter(GdxGame.COIN_BIT);
+    }
+    
+     @Override
+    public void onHeadHit() {
+        Gdx.app.log("Token", "Colison");
+         setCategoryFilter(GdxGame.DESTROY_BIT);
+         getCell().setTile(null);
     }
 
 }

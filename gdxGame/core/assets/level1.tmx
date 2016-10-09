@@ -1,14 +1,14 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.0" orientation="orthogonal" renderorder="right-down" width="50" height="50" tilewidth="16" tileheight="16" nextobjectid="16">
+<map version="1.0" orientation="orthogonal" renderorder="right-down" width="50" height="50" tilewidth="16" tileheight="16" nextobjectid="21">
  <tileset firstgid="1" name="tileset_gutter" tilewidth="16" tileheight="16" spacing="2" margin="1" tilecount="696" columns="29">
-  <image source="../../../../Downloads/NES - Super Mario Bros - Tileset.png" width="528" height="448"/>
+  <image source="Downloads/smbTileset.png" width="528" height="448"/>
  </tileset>
  <tileset firstgid="697" name="Tileset" tilewidth="16" tileheight="16" tilecount="924" columns="33">
-  <image source="../../../../Downloads/NES - Super Mario Bros - Tileset.png" width="528" height="448"/>
+  <image source="Downloads/NES - Super Mario Bros - Tileset.png" width="528" height="448"/>
  </tileset>
  <layer name="background" width="50" height="50">
   <data encoding="base64" compression="zlib">
-   eJztwzEJAAAMA7A+E1z/T3UMEkgvqaqqqqqqqqqqqj4/1TSAlQ==
+   eJztzjkNACAQAEHCowClSMUBUigwQEFyCZliui12tJQGAAAAAAAAAAA8NvNx2/dyRH/DC6vGP/z0eWsD2XuBaw==
   </data>
  </layer>
  <layer name="graphics" width="50" height="50">
@@ -24,5 +24,8 @@
  </objectgroup>
  <objectgroup name="ground_blue">
   <object id="15" x="0" y="704" width="432" height="16"/>
+ </objectgroup>
+ <objectgroup name="object_coin">
+  <object id="20" x="432" y="704" width="16" height="16"/>
  </objectgroup>
 </map>

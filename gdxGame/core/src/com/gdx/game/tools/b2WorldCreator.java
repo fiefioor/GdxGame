@@ -15,6 +15,7 @@ import com.badlogic.gdx.physics.box2d.FixtureDef;
 import com.badlogic.gdx.physics.box2d.PolygonShape;
 import com.badlogic.gdx.physics.box2d.World;
 import com.gdx.game.GdxGame;
+import com.gdx.game.sprites.Token;
 
 /**
  *
@@ -35,6 +36,7 @@ public class b2WorldCreator {
         this.createGroundRed(world, bodyDef, map);
         this.createGroundGreen(world, bodyDef, map);
         this.createGroundBlue(world, bodyDef, map);
+        this.createTokenBrix(world, bodyDef, map);
         
     }
     
@@ -79,6 +81,14 @@ public class b2WorldCreator {
             this.shape.setAsBox(rect.getWidth() / 2 / GdxGame.PPM, rect.getHeight() / 2 / GdxGame.PPM);
             this.fixtureDef.shape = shape;
             this.body.createFixture(fixtureDef);
+        }
+    }
+    
+    private void createTokenBrix(World world, BodyDef bodyDef, TiledMap map){
+        for(MapObject object : map.getLayers().get(5).getObjects().getByType(RectangleMapObject.class)){
+
+            Rectangle rect = ((RectangleMapObject) object).getRectangle();
+            new Token(world, map,rect );
         }
     }
     

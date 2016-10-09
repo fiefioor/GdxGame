@@ -32,6 +32,7 @@ import com.badlogic.gdx.utils.viewport.Viewport;
 import com.gdx.game.GdxGame;
 import com.gdx.game.scenes.Hud;
 import com.gdx.game.sprites.Player;
+import com.gdx.game.tools.WolrdContactListener;
 import com.gdx.game.tools.b2WorldCreator;
 
 /**
@@ -81,6 +82,8 @@ public class PlayScreen implements Screen {
         new b2WorldCreator(world, map);
 
         this.player = new Player(this.world, this);
+        
+        world.setContactListener(new WolrdContactListener());
 
     }
 
