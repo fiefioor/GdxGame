@@ -8,12 +8,12 @@
  </tileset>
  <layer name="background" width="50" height="50">
   <data encoding="base64" compression="zlib">
-   eJztzjkNACAQAEHCowClSMUBUigwQEFyCZliui12tJQGAAAAAAAAAAA8NvNx2/dyRH/DC6vGP/z0eWsD2XuBaw==
+   eJztzjkNACAQAEHCowClSMUBUigwQEFyCZliui12tJQGAAAAAAAAAAA8NvNx2/cS/wyvrBr/8NPnrQ1zF4HL
   </data>
  </layer>
  <layer name="graphics" width="50" height="50">
   <data encoding="base64" compression="zlib">
-   eJzt0sEJg0AQQNFBsbzETqIlpC4LsQu1AQ+Zs3gRdMXwHvzTsjssTAQAAAAAAAAARLyaiHfWNs+e98n3uqwv9I/S8+AOa1WuPd/6nOAuU+7fnC0H9/DKe+PmbKj+ox/3/la1
+   eJzt0sEJg0AQQNFBsQLriulELSF1pRC7MGkgB+esJ0FXIu/BPy27w8JEAAAAAAAAAEDEo4nosmfz3/P6fG/IxkL/KD0PrvCrytXW2/mv+pjgKnPu3yf77tzDM+9Nq7N3dY8WVeJWyw==
   </data>
  </layer>
  <objectgroup name="ground_red">
