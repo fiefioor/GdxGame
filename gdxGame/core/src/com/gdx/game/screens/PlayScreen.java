@@ -8,6 +8,8 @@ package com.gdx.game.screens;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input;
 import com.badlogic.gdx.Screen;
+import com.badlogic.gdx.assets.AssetManager;
+import com.badlogic.gdx.audio.Music;
 import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.graphics.Texture;
@@ -42,6 +44,7 @@ import com.gdx.game.tools.b2WorldCreator;
 public class PlayScreen implements Screen {
 
     private GdxGame game;
+    private AssetManager assetManager;
     private TextureAtlas atlas;
 
     private OrthographicCamera gameCam;
@@ -58,11 +61,14 @@ public class PlayScreen implements Screen {
     //Box2d variables
     private World world;
     private Box2DDebugRenderer box2DDebugRenderer;
+    
+    private Music music;
 
-    public PlayScreen(GdxGame game) {
+    public PlayScreen(GdxGame game, AssetManager assetManager) {
         atlas = new TextureAtlas("Mario_and_Enemies.pack");
 
         this.game = game;
+        this.assetManager = assetManager;
         this.gameCam = new OrthographicCamera();
         this.gamePort = new FitViewport(GdxGame.V_WIDTH / GdxGame.PPM, GdxGame.V_HEIGHT / GdxGame.PPM, gameCam);
 
@@ -79,9 +85,13 @@ public class PlayScreen implements Screen {
         this.world = new World(new Vector2(0, -10), true);
         this.box2DDebugRenderer = new Box2DDebugRenderer();
 
-        new b2WorldCreator(world, map);
+        new b2WorldCreator(world, map, this.assetManager);
 
         this.player = new Player(this.world, this);
+        
+        music = this.assetManager.get("audio/music/mario_music.ogg", Music.class);
+        music.setLooping(true);
+        music.play();
         
         world.setContactListener(new WolrdContactListener());
 
@@ -107,6 +117,7 @@ public class PlayScreen implements Screen {
         this.world.step(1 / 60f, 6, 2);
         
         player.update(dt);
+        hud.update(dt);
 
         gameCam.position.x = player.b2body.getPosition().x;
 

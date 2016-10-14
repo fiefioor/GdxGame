@@ -5,6 +5,7 @@
  */
 package com.gdx.game.tools;
 
+import com.badlogic.gdx.assets.AssetManager;
 import com.badlogic.gdx.maps.MapObject;
 import com.badlogic.gdx.maps.objects.RectangleMapObject;
 import com.badlogic.gdx.maps.tiled.TiledMap;
@@ -28,7 +29,8 @@ public class b2WorldCreator {
     private FixtureDef fixtureDef;
     private Body body;
     
-    public b2WorldCreator(World world, TiledMap map){
+    public b2WorldCreator(World world, TiledMap map, AssetManager assetManager){
+        
         this.bodyDef = new BodyDef();
         this.shape = new PolygonShape();
         this.fixtureDef = new FixtureDef();
@@ -36,7 +38,7 @@ public class b2WorldCreator {
         this.createGroundRed(world, bodyDef, map);
         this.createGroundGreen(world, bodyDef, map);
         this.createGroundBlue(world, bodyDef, map);
-        this.createTokenBrix(world, bodyDef, map);
+        this.createTokenBrix(world, bodyDef, map, assetManager);
         
     }
     
@@ -84,11 +86,11 @@ public class b2WorldCreator {
         }
     }
     
-    private void createTokenBrix(World world, BodyDef bodyDef, TiledMap map){
+    private void createTokenBrix(World world, BodyDef bodyDef, TiledMap map, AssetManager assetManager){
         for(MapObject object : map.getLayers().get(5).getObjects().getByType(RectangleMapObject.class)){
 
             Rectangle rect = ((RectangleMapObject) object).getRectangle();
-            new Token(world, map,rect );
+            new Token(world, map,rect, assetManager);
         }
     }
     
